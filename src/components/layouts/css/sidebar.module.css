@@ -1,0 +1,35 @@
+.sidebar_main {
+    background: #e4a5b2;
+    width: 18%;
+    height: 100vh;
+    padding: 2rem 1rem;
+    margin: 0px;
+}
+
+.sidebar_main h1{
+    color: azure;
+    font-size: 2rem; /* Tamaño*/
+    font-weight: 900; /* Grosor */
+}
+
+.main_list {
+    height: auto;
+}
+.list_option {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.list_option a{
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.list_option a:hover{
+    color: blueviolet;
+    transition: 0.5s;
+}
+

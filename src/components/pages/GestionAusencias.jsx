@@ -4,7 +4,8 @@ const GestionAusencias = () => {
 
     return (
 
-       <></>
+       <>
+       <p>Gestion asusencias</p></>
 
     );
 };
