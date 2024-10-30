@@ -29,7 +29,7 @@
     cursor: pointer;
 }
 .list_option a:hover{
-    color: rgb(11, 10, 77);
+    color: rgb(110, 14, 30);
     transition: 0.5s;
 }
 
