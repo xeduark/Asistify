@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Style from "./login.module.css";
 import PopupError from "../popups/PopupError";
 import { FaUser, FaLock, FaFacebookSquare, FaGoogle } from "react-icons/fa";
@@ -23,6 +23,7 @@ const Login = () => {
     if (email === "admin@correo.com" && password === "password123") {
       //guardar un token de auth
       localStorage.setItem("autenticacionToken", "123456");
+      
       navigate("/"); //redirigir al dashboard
     } else {
       setModalError(true); //mostrar modal de error
