@@ -11,6 +11,10 @@ import Dashboard from "../pages/Dashboard";
 
 export let EnrutadorApp = [
     {
+        path: 'registro-asistencia',
+        element: <RegistroAsistencia />
+    },
+    {
         element: <Login />,
         path: "login",
     },
@@ -41,11 +45,8 @@ export let EnrutadorApp = [
             {
                 path: 'perfil',
                 element: <Perfil />
-            },
-            {
-                path: 'registro-asistencia',
-                element: <RegistroAsistencia />
             }
+           
         ]
     },
 ]
