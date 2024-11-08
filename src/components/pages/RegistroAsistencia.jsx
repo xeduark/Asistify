@@ -17,7 +17,7 @@ const RegistroAsistencia = () => {
                     <div className={style.irLogin}>
                         
                         <img src="public\images\usuario.png" alt="" />
-                        <Link to ="login">Login</Link>
+                        <Link to ="/login">Login</Link>
 
                     </div>
                     <div className={style.logoEmpresa}>
