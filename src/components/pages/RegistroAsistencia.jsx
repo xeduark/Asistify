@@ -1,14 +1,16 @@
 import React from "react";
 import style from "./RegistroAsistencia.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 //className={Style.loginInput}
 
 const RegistroAsistencia = () => {
+    const navigate = useNavigate();
 
     return (
-        <body>
+        //AQUI HABIA UN BODY OJO CON ESO  NO SE PUEDE USAR BODY EN UN COMPONENTE
+        <div>
 
 
             <main className={style.main}>
@@ -16,6 +18,9 @@ const RegistroAsistencia = () => {
                 <div className={style.contenedor1}>
                     <div className={style.irLogin}>
                         
+
+                    <button onClick={() => navigate('/login')}>Login</button>
+
                         <img src="public\images\usuario.png" alt="" />
                         <Link to ="/login">Login</Link>
 
@@ -57,7 +62,7 @@ const RegistroAsistencia = () => {
 
             </main>
            
-        </body>
+        </div>
 
     );
 };

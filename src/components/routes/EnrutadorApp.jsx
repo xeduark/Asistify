@@ -11,12 +11,12 @@ import Dashboard from "../pages/Dashboard";
 
 export let EnrutadorApp = [
     {
-        path: 'registro-asistencia',
-        element: <RegistroAsistencia />
-    },
-    {
         element: <Login />,
         path: "login",
+    },
+    {
+        path: 'registro-asistencia',
+        element: <RegistroAsistencia />
     },
     {
         path: "/",
@@ -29,10 +29,6 @@ export let EnrutadorApp = [
             {
                 path: 'gestión-ausencias',
                 element: <GestionAusencias />
-            },
-            {
-                path: 'historial-ausencias',
-                element: <HistorialAusencias />
             },
             {
                 path: 'perfil-empleado',
