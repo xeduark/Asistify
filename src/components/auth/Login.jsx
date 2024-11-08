@@ -46,7 +46,7 @@ const Login = () => {
             <h4 className={Style.mainText}>
               Simplifica la gestión de tu equipo, optimiza el rendimiento.
             </h4>
-            <button className={Style.mainButton}>Conoce mas!</button>
+            <button onClick={() => navigate('/registro-asistencia')} className={Style.mainButton}>Registrar Horarios</button>
           </div>
           <span className={Style.curvaEsquina}></span>
         </div>
