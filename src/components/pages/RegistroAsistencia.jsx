@@ -18,7 +18,11 @@ const RegistroAsistencia = () => {
                 <div className={style.contenedor1}>
                     <div className={style.irLogin}>
                         
+
                     <button onClick={() => navigate('/login')}>Login</button>
+
+                        <img src="public\images\usuario.png" alt="" />
+                        <Link to ="/login">Login</Link>
 
                     </div>
                     <div className={style.logoEmpresa}>
