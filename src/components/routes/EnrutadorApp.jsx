@@ -2,10 +2,12 @@ import React from "react";
 import ProtectorRuta from "./ProtectorRuta";
 import Login from '../auth/Login';
 import GestionAusencias from "../pages/GestionAusencias";
-import HistorialAusencias from "../pages/HistorialAusencias";
+import GestionAsistencias from "../pages/GestionAsistencias";
 import PerfilEmpleado from "../pages/PerfilEmpleado";
 import Perfil from "../pages/Perfil";
 import RegistroAsistencia from "../pages/RegistroAsistencia";
+import Empleados from "../pages/Empleados";
+import CrearEmpleado from "../pages/CrearEmpleado";
 import Dashboard from "../pages/Dashboard";
 
 
@@ -27,7 +29,15 @@ export let EnrutadorApp = [
     ),
         children: [
             {
-                path: 'gestión-ausencias',
+                path: "gestion-empleados",
+                element: <Empleados/>
+            },
+            {
+                path: "crear-empleados",
+                element: <CrearEmpleado/>
+            },
+            {
+                path: 'gestion-ausencias',
                 element: <GestionAusencias />
             },
             {
@@ -35,8 +45,8 @@ export let EnrutadorApp = [
                 element: <PerfilEmpleado />
             },
             {
-                path: 'historial-ausencias',
-                element: <HistorialAusencias />
+                path: 'gestion-asistencias',
+                element: <GestionAsistencias />
             },
             {
                 path: 'perfil',

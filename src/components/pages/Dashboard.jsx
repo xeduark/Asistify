@@ -14,19 +14,15 @@ const Dashboard = () => {
   };
 
   return (
-    <>
-      <Navbar />
-      <main className={style.bashboard_main}>
-        {/*AQUI DEBE IR EL NAVBAR E IMPORTADO */}
-        <Sidebar />
+    <main>
+      <Navbar toggleSidebar={toggleSidebar} />
         <section className={style.panelControl}>
-          {/*AQUI DEBE IR MENU LATERAL E IMPORTADO*/}
+        <Sidebar isOpen={abrirMenu} />
           <section>
             <Outlet />
           </section>
         </section>
-      </main>
-    </>
+    </main>
   );
 };
 

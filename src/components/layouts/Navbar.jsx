@@ -1,23 +1,68 @@
-import style from './css/navbar.module.css'
+import React, { useState } from "react";
+import { CiSearch } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
+import { RiMenu4Fill } from "react-icons/ri";
+import Style from './navbar.module.css';
 
-export default function Navbar() {
-  const nombre = ""
-  const cerrarseccion = ()=> {
-    localStorage.removeItem("autenticacionToken");
-    window.location.reload(); 
-  }
-  
+const Navbar= ({ toggleSidebar }) => {
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("authenticationToken");
+    if (window.confirm("¿Estás seguro de que deseas cerrar sesión?")) {
+      navigate("/login");
+    }
+  };
 
   return (
-    <nav className={style.navbar_main}>
-      <div className={style.section_menu}>
-        <h1>Bienvenido {nombre}</h1>
-      </div>
-      <div className={style.section_perfil}>
-        <button onClick={cerrarseccion} > cerrar sesion</button>
-        <p>Administrador</p>
+    <nav className={Style.navbar}>
+      <div className={Style.container}>
+        <button className={Style.hamburger} onClick={toggleSidebar}>
+          <RiMenu4Fill className={Style.iconHam} />
+        </button>
+        <form className={Style.searchForm} role="search">
+          <input
+            className={Style.searchInput}
+            type="search"
+            placeholder="Buscar..."
+            aria-label="Search"
+          />
+          <button className={Style.searchButton} type="submit">
+            <CiSearch />
+          </button>
+        </form>
+        {/* Imagen de usuario redonda */}
+        <div className={Style.userContainer} onClick={toggleModal}>
+          <img
+            src="../../../public/images/user.png" // Aquí puedes cambiar el enlace por tu imagen de usuario
+            alt="user"
+            className={Style.userIcon}
+          />
+        </div>
+
+        {/* Modal pequeño que se despliega debajo de la imagen */}
+        {showModal && (
+          <div className={Style.modalContent}>
+            <ul className={Style.modalOptions}>
+              <p className={Style.mailUser}>Admin@ejemplo.com</p>
+              <hr />
+              <li>Perfil</li>
+              <li>Configuraciones</li>
+              <hr />
+              <li className={Style.btnLogout} onClick={handleLogout}>
+                Cerrar sesión
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </nav>
-  )
-}
+  );
+};
 
+export default Navbar;

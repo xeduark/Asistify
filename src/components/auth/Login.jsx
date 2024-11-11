@@ -36,6 +36,8 @@ const Login = () => {
   };
 
   return (
+    <main className={Style.contentMain}>
+
     <div className={Style.mainContainer}>
       {/*/MOSTRAR MODAL ERROR SI ESTA ACTIVADO */}
       {modalError && <PopupError onClose={cerrarModalError} />}
@@ -126,6 +128,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </main>
   );
 };
 
