@@ -1,6 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 :root{
+    --purpura-oscuro: #776BCC;
+    --purpura-claro: #C7C5F4;
+    --purpura-oscuro-2:#4C489D;
+    --purpura-claro-2:#7C78B8;
+    --purpura-oscuro-2:#5D54A4;
+    --purpura-oscuro-3:#6C63AC;
+    --purpura-claro-3:#6A679E;
+    --purpura-claro-4:#7E7BB9;
+    --purpura-oscuro-4:#5C5696;
+    --purpura-claro-5:#7875B5;
     --azul-celeste: #8AFFE6;
     --azul-oscuro: #1B3F4B;
     --azul-oscuro-intermedio: #3b5d68;
@@ -29,7 +39,7 @@ hr{
     left: 0; 
     width: 18rem; 
     height: 100%; 
-    border-right: 10px solid var(--azul-celeste);
+    border-right: 10px solid var(--purpura-oscuro-2);
     display: flex;
     justify-content: center;
     background-color: var(--negro); 
@@ -44,7 +54,7 @@ ul{
     margin-top: 0px;
 }
 li{
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
 }
 .icon{
     margin-right: 10px;
@@ -71,7 +81,7 @@ li{
 }
 
 .btnLogout:hover{
-    background-color: var(--azul-oscuro);
+    background-color: var(--purpura-oscuro-2);
     color: var(--blanco);
 }
 
@@ -80,7 +90,7 @@ li{
 }
 
 .links:hover{
-    background-color: var(--azul-oscuro);
+    background-color: var(--purpura-oscuro-2);
     color: var(--blanco);
 }
 

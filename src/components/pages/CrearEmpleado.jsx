@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./crearEmpleado.module.css";
+import { IoIosAdd } from "react-icons/io";
 
 const ServerForm = () => {
   const [nombre, setNombre] = useState("");
@@ -22,7 +23,8 @@ const ServerForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <h2 className={styles.tittle}>Crear Empleado</h2>
+      <h2 className={styles.tittle}>
+        <IoIosAdd /> Crear Empleado</h2>
       <div className={styles.container}>
         {/*INICIO DE LA COLUMNA 1*/}
         <div className={styles.columnUno}>

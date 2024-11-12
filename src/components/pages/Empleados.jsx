@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaServer } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
 import { IoIosAdd } from "react-icons/io";
 import { CiImport, CiExport, CiSearch } from "react-icons/ci";
 import { MdDelete, MdEdit } from "react-icons/md";
@@ -7,6 +7,7 @@ import { GrFormViewHide } from "react-icons/gr";
 import { Table, Pagination, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import style from "./empleados.module.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // Datos de los usuarios
 const users = [
@@ -103,7 +104,7 @@ const Empleados = () => {
       {/******************ENCABEZADO***************************/}
       <div className={style.containerMain}>
         <h1 className={style.tittle}>
-          <FaServer /> Lista de Empleados
+          <FaUsers /> Lista de Empleados
         </h1>
         <button className={style.btnAdd} onClick={irCrear}>
           <IoIosAdd className={style.icon} />
@@ -133,7 +134,7 @@ const Empleados = () => {
         </span>
       </form>
       {/*****************Tabla de Servidores **********************/}
-      <div className={style.container}>
+      <div className={style.containerTable}>
         <Table className={`${style.table} ${style.customTable}`}>
           <thead>
             <tr>

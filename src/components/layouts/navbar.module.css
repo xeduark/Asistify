@@ -1,5 +1,15 @@
 /* Estilo para el Navbar */
 :root{
+  --purpura-oscuro: #776BCC;
+  --purpura-claro: #C7C5F4;
+  --purpura-oscuro-2:#4C489D;
+  --purpura-claro-2:#7C78B8;
+  --purpura-oscuro-2:#5D54A4;
+  --purpura-oscuro-3:#6C63AC;
+  --purpura-claro-3:#6A679E;
+  --purpura-claro-4:#7E7BB9;
+  --purpura-oscuro-4:#5C5696;
+  --purpura-claro-5:#7875B5;
   --azul-celeste: #8AFFE6;
   --azul-oscuro: #1B3F4B;
   --azul-oscuro-intermedio: #3b5d68;
@@ -69,7 +79,7 @@
   
   .searchButton:hover {
     transform: scale(1.2); /*zoom*/
-    background: var(--azul-oscuro-intermedio);
+    background: var(--azul-claro-intermedio);
   }
   /* Imagen de usuario redonda */
   .userContainer {
@@ -130,7 +140,7 @@
   }
   
   .modalOptions li:hover {
-    background: var(--azul-oscuro);
+    background: var(--purpura-oscuro-2);
     color: var(--blanco);
   }
   /* Icono de hamburguesa */
@@ -148,7 +158,7 @@
 
   .hamburger:hover{
     transform: scale(1.2);
-    background: var(--azul-oscuro-intermedio);
+    background: var(--azul-claro-intermedio);
   }
   
   @media (max-width: 768px) {

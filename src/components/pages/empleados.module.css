@@ -1,4 +1,14 @@
 :root{
+    --purpura-oscuro: #776BCC;
+    --purpura-claro: #C7C5F4;
+    --purpura-oscuro-2:#4C489D;
+    --purpura-claro-2:#7C78B8;
+    --purpura-oscuro-2:#5D54A4;
+    --purpura-oscuro-3:#6C63AC;
+    --purpura-claro-3:#6A679E;
+    --purpura-claro-4:#7E7BB9;
+    --purpura-oscuro-4:#5C5696;
+    --purpura-claro-5:#7875B5;
     --azul-celeste: #8AFFE6;
     --azul-oscuro: #1B3F4B;
     --azul-oscuro-intermedio: #3b5d68;
@@ -29,7 +39,7 @@
 /***********************ENCABEZADO*************************/
 .containerMain{
     display: flex;
-    top: 90px;
+    top: 80px;
     margin-left: 20px;
     margin-right: 20px;
     position: relative;
@@ -43,7 +53,8 @@
     padding: 4px 8px;
 
     &:hover{
-      background: var(--gris-oscuro-medio);
+      background: var(--purpura-oscuro-2);
+      color: var(--blanco);
     }
 }
 
@@ -54,7 +65,8 @@
     padding: 4px 8px;
 
     &:hover{
-      background: var(--gris-oscuro-medio);
+      background: var(--purpura-oscuro-2);
+      color: var(--blanco);
     }
 }
 
@@ -99,7 +111,7 @@
   box-shadow: 0 0 5px var(--azul-oscuro);
   border-radius: 10px;
   margin-left: 20px;
-  margin-top: 120px;
+  margin-top: 100px;
   margin-right: 20px;
   background: var(--blanco);
   overflow: hidden; /* Oculta el exceso de contenido */
@@ -123,14 +135,14 @@
   /* Estilos al enfocar el input */
   &:focus {
   outline: none; 
-  border: 1px solid var(--azul-claro); 
+  border: 1px solid var(--azul-profundo); 
   }
 }
 
 /* Estilos del icono */
 .searchIcon {
   position: absolute;
-  top: 55%;
+  top: 50%;
   left: 40px;
   transform: translateY(-50%);
   color: var(--gris-oscuro);
@@ -148,121 +160,126 @@
   }
 }
 
-
 /*********************TABLA*******************/
 
+.containerTable{
+  width: 63.5rem;
+}
 /*CHECKBOX*/
 .customCheckbox {
-    display: flex;
-    align-items: center;
-    width: 20px; /* Tamaño del checkbox */
-    height: 20px;
-    border: 2px solid var(--gris-oscuro); /* Color y grosor del borde */
-    border-radius: 4px; /* Opcional: para bordes redondeados */
-    transition: border-color 0.3s ease; /* Efecto de transición */
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 20px; /* Tamaño del checkbox */
+  height: 20px;
+  border: 2px solid var(--gris-oscuro); /* Color y grosor del borde */
+  border-radius: 4px; /* Opcional: para bordes redondeados */
+  transition: border-color 0.3s ease; /* Efecto de transición */
+  cursor: pointer;
 
-    &:hover{
-      background: var(--azul-celeste);
-    }
+  &:hover{
+    background: var(--azul-celeste);
+  }
 }
 
 .customTable {
-    font-size: 16px;
-    box-shadow: 0 0 5px var(--azul-oscuro);
-    border-radius: 10px; /* Ajusta el valor según el grado de redondez que desees */
-    overflow: hidden; /* Esto es importante para que las esquinas redondeadas se apliquen correctamente */
-    border: 1px solid var(--gris-claro); /* Borde alrededor de la tabla */
-  }
+  font-size: 16px;
+  box-shadow: 0 0 5px var(--azul-oscuro);
+  border-radius: 10px; /* Ajusta el valor según el grado de redondez que desees */
+  overflow: hidden; /* Esto es importante para que las esquinas redondeadas se apliquen correctamente */
+  border: 1px solid var(--gris-claro); /* Borde alrededor de la tabla */
+}
 
 .table td,
 .table th {
-  border-left: none; /* Quitar borde izquierdo */
-  border-right: none; /* Quitar borde derecho */
+border-left: none; /* Quitar borde izquierdo */
+border-right: none; /* Quitar borde derecho */
 }
 
 .table{
-  width: 63rem;
-  margin-left: 20px;
-  margin-right: 20px;
-  top: 40px;
-  position: relative;
+width: 60rem;
+margin-left: 20px;
+margin-right: 20px;
+top: 20px;
+position: relative;
 }
 
 .table thead th {
-  border-bottom: 2px solid var(--gris-claro); /* Mantener borde inferior en el encabezado */
+border-bottom: 1px solid var(--gris-claro); /* Mantener borde inferior en el encabezado */
 }
 
 .table tbody tr {
-  border-bottom: 1px solid var(--azul-claro); /* Líneas horizontales */
+border-bottom: 1px solid var(--azul-claro); /* Líneas horizontales */
 
 }
 
 .table tbody td {
-  border-bottom: 1px solid var(--gris-claro); /* Mantener las líneas horizontales entre filas */
+border-bottom: 1px solid var(--gris-claro); /* Mantener las líneas horizontales entre filas */
 }
 /* En tu archivo CSS */
 .table tfoot {
-  height: 3.9rem; /* Ajusta el valor según tu necesidad */
+height: 5px;
 }
 
 .table tfoot td {
-  padding: 10px; /* Ajusta el padding según tu necesidad */
+padding: 0px; /* Ajusta el padding según tu necesidad */
 }
 
 .textfoot{
-  margin-left: 10px;
+margin-left: 10px;
+font-size: 12px;
 }
 
 .selectLine{
-  padding: 0;
-  width: 3.5rem;
-  margin-left: 10px;
+padding: 0;
+width: 20px;
+height: 2rem;
+margin-top: 15px;
+margin-left: 30px;
 }
 
 .pestanas{
-  padding: 0;
-  width: 3rem;
-  margin-right: 60px;
-  height: 1rem;
-  margin-top: 0;
+padding: 0;
+width: 3rem;
+margin-right: 60px;
+height: 25px;
+margin-top: 0;
 }
 /*******************BOTONES CRUD*****************/
 
 .btnVer, .btnEdit, .btnDelete{
-  border: none;
-  padding: 5px 7px; /* Ajusta el padding según tus necesidades */
-  margin-right: 7px; /* Espacio entre los botones */
-  cursor: pointer;
-  border-radius: 4px;
-  color: var(--blanco);
+border: none;
+padding: 5px 7px; /* Ajusta el padding según tus necesidades */
+margin-right: 7px; /* Espacio entre los botones */
+cursor: pointer;
+border-radius: 4px;
+color: var(--blanco);
 }
 
 .btnVer{
-  background: var(--azul-profundo);
-  &:hover{
-    background: var(--azul-profundo-oscuro);
-  }
+background: var(--azul-profundo);
+&:hover{
+  background: var(--azul-profundo-oscuro);
+}
 }
 
 .btnEdit{
-  background: var(--naranja);
-  &:hover{
-    background: var(--naranja-claro);
-  }
+background: var(--naranja);
+&:hover{
+  background: var(--naranja-claro);
+}
 }
 
 .btnDelete{
-  background: var(--rojo);
-  &:hover{
-    background: var(--rojo-claro);
-  }
+background: var(--rojo);
+&:hover{
+  background: var(--rojo-claro);
+}
 }
 
 @media (max-width: 768px) {
-    .container {
-        left: 0; /* O un valor más pequeño si quieres un margen */
-        width: 100%; /* Asegura que el contenedor use todo el ancho */
-    }
+  .container {
+      left: 0; /* O un valor más pequeño si quieres un margen */
+      width: 100%; /* Asegura que el contenedor use todo el ancho */
+  }
 }
 

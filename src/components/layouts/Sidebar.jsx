@@ -1,9 +1,8 @@
 import React from "react";
 import Style from './sidebar.module.css';
 import { NavLink } from 'react-router-dom';
-import { VscServerEnvironment } from "react-icons/vsc";
 import { GrHomeRounded } from "react-icons/gr";
-import { FaServer } from "react-icons/fa";
+import { FaUsers, FaUserSlash, FaUserCheck } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
 
 
@@ -28,17 +27,17 @@ const Sidebar = ({ isOpen }) => {
                 </li>
                 <li>
                     <NavLink to="/gestion-empleados" className={({ isActive }) => isActive ? `${Style.links} active` : Style.links}>
-                        <FaServer className={Style.icon}/>Empleados
+                        <FaUsers className={Style.icon}/>Empleados
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/gestion-ausencias" className={({ isActive }) => isActive ? `${Style.links} active` : Style.links}>
-                        <VscServerEnvironment className={Style.icon}/>Gestión Ausencias
+                        <FaUserSlash  className={Style.icon}/>Gestión Ausencias
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/gestion-asistencias" className={({ isActive }) => isActive ? `${Style.links} active` : Style.links}>
-                        <VscServerEnvironment className={Style.icon}/>Gestión Asistencias
+                        <FaUserCheck className={Style.icon}/>Gestión Asistencias
                     </NavLink>
                 </li>
                 <li>
