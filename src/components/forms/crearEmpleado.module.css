@@ -31,6 +31,7 @@
       width: 1020px;
       height: 500px;
       padding: 20px;
+      z-index: 7;
   }
   
   .container {

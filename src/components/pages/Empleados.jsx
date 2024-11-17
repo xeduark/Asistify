@@ -8,62 +8,61 @@ import { Table, Pagination, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import style from "./empleados.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-// Datos de los usuarios
-const users = [
-  {
-    name: "Alcides Antonio",
-    email: "alcides.antonio@devias.io",
-    location: "Madrid, Comunidad de Madrid, Spain",
-    phone: "908-691-3242",
-  },
-  {
-    name: "Marcus Finn",
-    email: "marcus.finn@devias.io",
-    location: "Carson City, Nevada, USA",
-    phone: "415-907-2647",
-  },
-  {
-    name: "Jie Yan",
-    email: "jie.yan.song@devias.io",
-    location: "North Canton, Ohio, USA",
-    phone: "770-635-2682",
-  },
-  {
-    name: "Nasimiyu Danai",
-    email: "nasimiyu.danai@devias.io",
-    location: "Salt Lake City, Utah, USA",
-    phone: "801-301-7894",
-  },
-  {
-    name: "Iulia Albu",
-    email: "iulia.albu@devias.io",
-    location: "Murray, Utah, USA",
-    phone: "313-812-8947",
-  },
-];
+import Swal from 'sweetalert2';
 
 const Empleados = () => {
-  const [searchValue, setSearchValue] = useState(""); // Estado para el input de búsqueda
-  const [filteredUsers, setFilteredUsers] = useState(users); // Estado para los usuarios filtrados
-  const [selectAll, setSelectAll] = useState(false); // Estado para seleccionar todos
-  const [currentPage, setCurrentPage] = useState(1); // Estado para la página actual
-  const [rowsPerPage, setRowsPerPage] = useState(5); // Estado para filas por página
+  const [searchValue, setSearchValue] = useState("");
+  const [empleados, setEmpleados] = useState([]);
+  const [filteredEmpleados, setFilteredEmpleados] = useState([]); // Para filtrados
+  const [selectAll, setSelectAll] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selectedUsers, setSelectedUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
+
+  // Obtener el token JWT de localStorage
+  const token = localStorage.getItem("autenticacionToken");
+
+  // Crea la instancia de Toast
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000, // Duración del Toast (3 segundos)
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
+
+  // Función para mostrar un Toast de éxito después de crear una receta
+  const showSuccessToast = () => {
+    Toast.fire({
+      icon: "success",
+      title: "Empleado eliminado exitosamente",
+    });
+  };
 
   const irCrear = () => {
     navigate("/crear-empleados");
   };
+
+  const irEditar = (id) => {
+    navigate(`/empleados/${id}/editar`);
+  };
+
   // Función para alternar la selección de todos los usuarios
   const toggleSelectAll = () => {
     if (selectAll) {
-      setSelectedUsers([]); // Deseleccionar todos
+      setSelectedUsers([]);
     } else {
-      setSelectedUsers(users.map((_, index) => index)); // Seleccionar todos
+      setSelectedUsers(filteredEmpleados.map((_, index) => index));
     }
-    setSelectAll(!selectAll); // Cambiar estado de selectAll
+    setSelectAll(!selectAll);
   };
 
   // Función para alternar la selección de un usuario específico
@@ -81,23 +80,106 @@ const Empleados = () => {
   };
 
   // Función para filtrar los usuarios
-  const filterUsers = () => {
-    const newFilteredUsers = users.filter((user) =>
-      user.name.toLowerCase().includes(searchValue.toLowerCase())
+  const filterEmpleados = () => {
+    const filtered = empleados.filter((empleado) =>
+      empleado.nombre.toLowerCase().includes(searchValue.toLowerCase())
     );
-    setFilteredUsers(newFilteredUsers);
+    setFilteredEmpleados(filtered);
   };
 
   // Efecto para filtrar los usuarios cuando el valor de búsqueda cambia
   useEffect(() => {
-    filterUsers();
-  }, [searchValue]); // Depende del estado searchValue
+    filterEmpleados();
+  }, [searchValue, empleados]); //Depende de searchValue y empleados
 
-  // Calcular los índices para la paginación
-  const indexOfLastUser = currentPage * rowsPerPage;
-  const indexOfFirstUser = indexOfLastUser - rowsPerPage;
-  // const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser); // Quitar esta línea
-  const totalPages = Math.ceil(filteredUsers.length / rowsPerPage);
+  useEffect(() => {
+    const obtenerEmpleados = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/empleados/ver");
+        if (!response.ok) {
+          throw new Error(`Error HTTP: ${response.status}`);
+        }
+        const data = await response.json();
+        setEmpleados(data);
+        setFilteredEmpleados(data);
+      } catch (error) {
+        setError(error);
+        console.error("Error fetching empleados:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    obtenerEmpleados();
+  }, []);
+
+  const indexOfLastEmpleado = currentPage * rowsPerPage;
+  const indexOfFirstEmpleado = indexOfLastEmpleado - rowsPerPage;
+  const currentEmpleados = filteredEmpleados.slice(
+    indexOfFirstEmpleado,
+    indexOfLastEmpleado
+  );
+  const totalPages = Math.ceil(filteredEmpleados.length / rowsPerPage);
+
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  const handleDelete = async (id) => {
+    const confirm = await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Esta acción eliminará al empleado de forma permanente.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí",
+      cancelButtonText: "No",
+    });
+    if (confirm.isConfirmed) {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          `http://localhost:5000/api/empleados/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // Asegúrate de que `token` esté definido
+            },
+          }
+        );
+        if (response.ok) {
+          showSuccessToast();
+          // Actualizar la lista de empleados
+          setEmpleados(empleados.filter((empleado) => empleado.id !== id));
+          setFilteredEmpleados(
+            filteredEmpleados.filter((empleado) => empleado.id !== id)
+          );
+        } else {
+          const errorData = await response.json();
+          Swal.fire({
+            icon: "error",
+            title: "Error al eliminar",
+            text: "No se pudo eliminar el empleado: " + errorData.message,
+          });
+        }
+      } catch (error) {
+        console.error("Error eliminando empleado:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Error al eliminar",
+          text: "Ocurrió un error al intentar eliminar al empleado.",
+        });
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
 
   return (
     <div className={style.container}>
@@ -146,46 +228,49 @@ const Empleados = () => {
                   onChange={toggleSelectAll}
                 />
               </th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Location</th>
-              <th>Phone</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Nivel Educativo</th>
+              <th>Estado</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map(
-              (
-                user,
-                index // Usa filteredUsers para la tabla
-              ) => (
-                <tr key={index}>
-                  <td>
-                    <input
-                      type="checkbox"
-                      className={style.customCheckbox}
-                      checked={selectedUsers.includes(index)}
-                      onChange={() => toggleSelectUser(index)}
-                    />
-                  </td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.location}</td>
-                  <td>{user.phone}</td>
-                  <td>
-                    <button className={style.btnVer}>
-                      <GrFormViewHide />
-                    </button>
-                    <button className={style.btnEdit}>
-                      <MdEdit />
-                    </button>
-                    <button className={style.btnDelete}>
-                      <MdDelete />
-                    </button>
-                  </td>
-                </tr>
-              )
-            )}
+            {currentEmpleados.map((empleado, index) => (
+              <tr key={empleado.id}>
+                {" "}
+                {/* Usar empleado.id como key */}
+                <td>
+                  <input
+                    type="checkbox"
+                    className={style.customCheckbox}
+                    checked={selectedUsers.includes(index)}
+                    onChange={() => toggleSelectUser(index)}
+                  />
+                </td>
+                <td>{empleado.nombre}</td>
+                <td>{empleado.email}</td>
+                <td>{empleado.nivelEducativo}</td>
+                <td>Estado</td>
+                <td>
+                  <button className={style.btnVer}>
+                    <GrFormViewHide />
+                  </button>
+                  <button
+                    className={style.btnEdit}
+                    onClick={() => irEditar(empleado.id)}
+                  >
+                    <MdEdit />
+                  </button>
+                  <button
+                    className={style.btnDelete}
+                    onClick={() => handleDelete(empleado.id)}
+                  >
+                    <MdDelete />
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
           <tfoot>
             <tr>
@@ -208,10 +293,10 @@ const Empleados = () => {
                 <div
                   className={`d-flex justify-content-center align-items-center${style.tfootSmall}`}
                 >
-                  <span>{`${indexOfFirstUser + 1}-${Math.min(
-                    indexOfLastUser,
-                    filteredUsers.length
-                  )} of ${filteredUsers.length}`}</span>
+                  <span>{`${indexOfFirstEmpleado + 1}-${Math.min(
+                    indexOfLastEmpleado,
+                    filteredEmpleados.length
+                  )} of ${filteredEmpleados.length}`}</span>
                 </div>
               </td>
               <td colSpan="3">

@@ -1,14 +1,17 @@
 import { useState } from "react";
 import Style from "./login.module.css";
 import PopupError from "../popups/PopupError";
+import Loader from "../layouts/Loader";
 import { FaUser, FaLock, FaFacebookSquare, FaGoogle } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  console.log("Si se esta renderizando");
-  //estado para manejar el correo y la contraseña
+
+  //Estado para la transisición
+  const [isLoading, setIsLoading] = useState(false); // Estado para el loader
+  
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,17 +19,38 @@ const Login = () => {
   //estado para mostrar el modal de error
   const [modalError, setModalError] = useState(false);
 
-  //simulación de autenticación
-  const envioSesion = (e) => {
+  const envioSesion = async (e) => {
     e.preventDefault();
+  
+    try {
+      // Realiza una solicitud POST al backend
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }), // Enviar el correo y contraseña en el cuerpo de la solicitud
+      });
+  
+      if (response.ok) {
+        const data = await response.json(); // Decodificar la respuesta
+        localStorage.setItem("autenticacionToken", data.token); // Guardar el token en localStorage
+        setIsLoading(true);
+        setTimeout(() => {
+          navigate("/"); // Redirigir al dashboard
+        }, 1500); // Tiempo de espera en milisegundos (1.5 segundos)
 
-    if (email === "admin@correo.com" && password === "password123") {
-      //guardar un token de auth
-      localStorage.setItem("autenticacionToken", "123456");
-      
-      navigate("/"); //redirigir al dashboard
-    } else {
-      setModalError(true); //mostrar modal de error
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2500); // Tiempo de espera en milisegundos (2.5 segundos)
+        
+      } else {
+        // Si la autenticación falla, mostrar modal de error
+        setModalError(true);
+      }
+    } catch (error) {
+      console.error("Error al intentar iniciar sesión:", error);
+      setModalError(true); // Mostrar modal de error si ocurre un fallo
     }
   };
 
@@ -39,6 +63,7 @@ const Login = () => {
     <main className={Style.contentMain}>
 
     <div className={Style.mainContainer}>
+    {isLoading && <Loader />}
       {/*/MOSTRAR MODAL ERROR SI ESTA ACTIVADO */}
       {modalError && <PopupError onClose={cerrarModalError} />}
       <div className={Style.backbox}>

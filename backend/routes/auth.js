@@ -1,47 +1,53 @@
-// auth.js
+require('dotenv').config();
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const router = express.Router();
-require('dotenv').config(); // Carga las variables de entorno
+const bcrypt = require('bcryptjs');
+const db = require('../config/firebaseConfig');
 
-// Clave secreta para JWT desde el .env
+const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// Ruta de inicio de sesión
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    // Aquí debes verificar las credenciales del administrador en tu base de datos
-    if (email === 'admin@correo.com' && password === 'admin123') {
-
-        // Generar un token JWT
-        const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: '1h' });
-        return res.json({ token });
-        
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Correo y contraseña son requeridos.' });
     }
 
-    return res.status(401).json({ message: 'Credenciales incorrectas' });
-});
+    try {
+      const snapshot = await db.collection('administrador')
+        .where('correo', '==', email)
+        .limit(1)
+        .get();
 
-// Middleware para proteger rutas
-const authenticateJWT = (req, res, next) => {
-    const token = req.headers['authorization']?.split(' ')[1];
+      if (snapshot.empty) {
+        return res.status(401).json({ error: 'Correo o contraseña incorrectos.' });
+      }
 
-    if (token) {
-        jwt.verify(token, JWT_SECRET, (err, user) => {
-            if (err) {
-                return res.sendStatus(403);
-            }
-            req.user = user;
-            next();
-        });
-    } else {
-        res.sendStatus(401);
+      const adminDoc = snapshot.docs[0];
+      const adminData = adminDoc.data();
+
+      if (!adminData.contraseña) {
+        console.error('El campo "contraseña" no está definido.');
+        return res.status(500).json({ error: 'Error interno del servidor.' });
+      }
+
+      const isMatch = await bcrypt.compare(password, adminData.contraseña);
+      if (!isMatch) {
+        return res.status(401).json({ error: 'Correo o contraseña incorrectos.' });
+      }
+
+      const token = jwt.sign(
+        { id: adminDoc.id, correo: adminData.correo }, // id del documento
+        JWT_SECRET,
+        { expiresIn: '2h' }
+      );
+
+      res.json({ message: 'Inicio de sesión exitoso.', token });
+    } catch (error) {
+      console.error('Error en la autenticación:', error);
+      res.status(500).json({ error: 'Error interno del servidor.' });
     }
-};
+  });
 
-// Exportar el router y el middleware de autenticación
-module.exports = {
-    authRouter: router,
-    authenticateJWT
-};
+module.exports = router;

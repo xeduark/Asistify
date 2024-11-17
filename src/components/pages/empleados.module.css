@@ -34,6 +34,7 @@
  height: 100%;
  position: fixed;
  left: 19rem;
+ overflow-y: auto;
 }
 
 /***********************ENCABEZADO*************************/

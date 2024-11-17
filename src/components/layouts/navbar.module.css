@@ -23,10 +23,10 @@
 
   /* Estilo general del navbar */
   .navbar {
-    background-color:var(--azul-oscuro);
+    background-color:var(--purpura-oscuro-2);
     opacity: 0.9;
     padding: 10px 20px;
-    z-index: 1112;
+    z-index: 9;
     position: fixed;
     width: 100%;
     left: 18rem;
@@ -68,19 +68,21 @@
     padding: 8px 8px;
     border: none;
     color: var(--blanco);
-    background: var(--azul-oscuro);
+    background: var(--purpura-oscuro-2);
     border-radius: 100%;
     cursor: pointer;
     font-size: 20px;
     display: flex;
     align-items: center;
     margin-left: 5px;
+
+    &:hover{
+      transform: scale(1.2);
+      background: var(--purpura-oscuro);
+      }
   }
   
-  .searchButton:hover {
-    transform: scale(1.2); /*zoom*/
-    background: var(--azul-claro-intermedio);
-  }
+  
   /* Imagen de usuario redonda */
   .userContainer {
     position: relative;
@@ -129,10 +131,21 @@
   .mailUser, .btnLogout{
    text-align: center;
   }
+  .containerNameUser{
+    display: flex;
+    margin-top: 20px;
+    position: absolute;
+    left: 900px;
+  }
+  
+  .userName{
+    color: var(--blanco);
+    font-weight: bold;
+  }
   .mailUser{
     padding-bottom: 10px;
     padding-top: 10px;
-    color: var(--azul-celeste);
+    color: var(--purpura-oscuro-2);
   }
   
   li{
@@ -150,15 +163,15 @@
     padding: 4px 8px;
     border: none;
     color: var(--blanco);
-    background: var(--azul-oscuro);
+    background: var(--purpura-oscuro-2);
     border-radius: 50%;
     cursor: pointer;
     margin-right: 10px;
-  }
 
-  .hamburger:hover{
+    &:hover{
     transform: scale(1.2);
-    background: var(--azul-claro-intermedio);
+    background: var(--purpura-oscuro);
+    }
   }
   
   @media (max-width: 768px) {
@@ -173,14 +186,20 @@
   
   /* Ajustes para pantallas más grandes */
   @media (min-width: 1000px) {
-    .userContainer {
-      left: 42%; 
+    .userContainer{
+      left: 47%; 
     }
   }
   /* Ajustes para pantallas entre 768px y 991px */
   @media (max-width: 991px) {
-    .userContainer {
+    .userContainer{
       left: 20%; /* Más a la izquierda a medida que la pantalla se reduce */
+    }
+    .containerNameUser{
+      left: 340px;
+    }
+    .searchInput{
+      width: 200px;
     }
   }
   @media (max-width: 867px) {
@@ -200,7 +219,7 @@
   /* Ajustes para pantallas muy pequeñas (menos de 576px) */
   @media (max-width: 575px) {
     .userContainer {
-      left: 10%; /* Aún más a la izquierda si es necesario */
+      left: 24%; /* Aún más a la izquierda si es necesario */
     }
   
   }

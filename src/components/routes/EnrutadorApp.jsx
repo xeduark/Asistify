@@ -7,7 +7,8 @@ import PerfilEmpleado from "../pages/PerfilEmpleado";
 import Perfil from "../pages/Perfil";
 import RegistroAsistencia from "../pages/RegistroAsistencia";
 import Empleados from "../pages/Empleados";
-import CrearEmpleado from "../pages/CrearEmpleado";
+import CrearEmpleado from "../forms/CrearEmpleado";
+import EditarEmpleado from "../forms/EditarEmpleado";
 import Dashboard from "../pages/Dashboard";
 
 
@@ -35,6 +36,10 @@ export let EnrutadorApp = [
             {
                 path: "crear-empleados",
                 element: <CrearEmpleado/>
+            },
+            {
+                path: "/empleados/:id/editar",
+                element: <EditarEmpleado/>
             },
             {
                 path: 'gestion-ausencias',

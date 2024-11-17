@@ -1,18 +1,29 @@
 import React from "react";
 import Style from './sidebar.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { GrHomeRounded } from "react-icons/gr";
 import { FaUsers, FaUserSlash, FaUserCheck } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
-
+import Swal from "sweetalert2";
 
 const Sidebar = ({ isOpen }) => {
+    const navigate = useNavigate();
 
     const handleLogout = () => {
-        localStorage.removeItem("authenticationToken");
-        if (window.confirm("¿Estás seguro de que deseas cerrar sesión?")) {
-          navigate("/login");
-        }
+        Swal.fire({
+          title: "¿Estás seguro de que deseas cerrar sesión?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Sí",
+          cancelButtonText: "No",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            localStorage.removeItem("authenticationToken");
+            navigate("/login");
+          }
+        });
       };
 
     return (

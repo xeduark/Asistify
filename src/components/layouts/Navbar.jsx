@@ -1,23 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import { RiMenu4Fill } from "react-icons/ri";
-import Style from './navbar.module.css';
+import Style from "./navbar.module.css";
+import Swal from "sweetalert2";
 
-const Navbar= ({ toggleSidebar }) => {
+const Navbar = ({ toggleSidebar }) => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("authenticationToken");
-    if (window.confirm("¿Estás seguro de que deseas cerrar sesión?")) {
-      navigate("/login");
-    }
+    Swal.fire({
+      title: "¿Estás seguro de que deseas cerrar sesión?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("autenticacionToken");
+        navigate("/login");
+      }
+    });
   };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem("autenticacionToken");
+        const response = await fetch("http://localhost:5000/api/usuario/user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("RTA", response)
+        const data = await response.json();
+        setUserName(data.nombre); // Actualiza el estado con el nombre
+        setUserEmail(data.correo);
+      } catch (error) {
+        console.error("Error al obtener el usuario:", error);
+      }
+    };
+    fetchUserData();
+  }, []);
 
   return (
     <nav className={Style.navbar}>
@@ -36,6 +69,9 @@ const Navbar= ({ toggleSidebar }) => {
             <CiSearch />
           </button>
         </form>
+        <div className={Style.containerNameUser}>
+          <p className={Style.userName}>{userName}</p>
+        </div>
         {/* Imagen de usuario redonda */}
         <div className={Style.userContainer} onClick={toggleModal}>
           <img
@@ -49,7 +85,7 @@ const Navbar= ({ toggleSidebar }) => {
         {showModal && (
           <div className={Style.modalContent}>
             <ul className={Style.modalOptions}>
-              <p className={Style.mailUser}>Admin@ejemplo.com</p>
+              <p className={Style.mailUser}>{userEmail}</p>
               <hr />
               <li>Perfil</li>
               <li>Configuraciones</li>
