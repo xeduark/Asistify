@@ -1,3 +1,10 @@
+.sidebar_logo {
+    width: 200px; /* Ajusta según el tamaño deseado */
+    height: auto; /* Mantiene la proporción */
+    margin: 0 auto 0.1rem auto; /* Centrado horizontal con espacio debajo */
+    display: block;
+  }
+  
 .sidebar_main {
     background: #120657;
     width: 18%;
@@ -6,11 +13,7 @@
     margin: 0px;
 }
 
-.sidebar_main h1{
-    color: azure;
-    font-size: 2rem; /* Tamaño*/
-    font-weight: 900; /* Grosor */
-}
+
 
 .main_list {
     height: auto;

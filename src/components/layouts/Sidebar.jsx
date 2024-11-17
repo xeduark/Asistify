@@ -1,10 +1,14 @@
 import style from "./css/sidebar.module.css";
 import { NavLink } from "react-router-dom";
+import logo from "../../assets/logo.png"; // Asegúrate de ajustar la ruta según la ubicación de tu logo
 
 export default function Sidebar() {
   return (
     <div className={style.sidebar_main}>
-      <h1>Menu</h1>
+      {/* Logo añadido */}
+      <img src={logo} alt="Logo" className={style.sidebar_logo} />
+
+      {/* Menu lateral */}
       <ul className={style.main_list}>
         <li className={style.list_option}>
           <NavLink to="gestión-ausencias" activeClassName="active">
@@ -40,3 +44,4 @@ export default function Sidebar() {
     </div>
   );
 }
+
