@@ -50,7 +50,63 @@ La aplicación se centrará exclusivamente en la gestión y visualización de la
 ## Tecnologías
 
 - **Frontend**: React + Vite y CSS
-- **Backend**: Node.js
+- **Backend**: Node.js + Express
 - **Analítica**: Python
 - **Gráficos**: React
 - **Base de Datos**: Firebase
+
+# Inventario: Backend
+
+Este repositorio contiene el backend diseñado para gestionar los inventarios de los servidores de una forma organizada y accesible.
+
+## Características principales
+- [x] 🔒 Autenticación JWT
+- [x] 🔎 Consulta de empleados
+- [x] ➕ Agregar nuevos empleados
+- [x]  ✏️ Actualizar información
+- [x]  ⛔ Eliminar empleados del la nomina
+- [x] 👮 Registro de las acciones de los usuarios
+
+## Tecnologías utilizadas
+
+- **Lenguaje:** Node JS
+- **Framework:** Express 
+- **Base de datos:** Firestore DataBase
+
+## Instalación
+
+ 1. **Clonar el repositorio**
+```bash
+git clone https://github.com/dannyedison75/Asistify.git
+cd backend
+```
+
+2. **Configurar el entorno**
+   1. Crear archivo ``.env`` basado en ``.env.example``
+   2. Configurar las variables de entorno:
+      - ``FIREBASE_PROJECT_ID``
+      - ``FIREBASE_PRIVATE_KEY``
+      - ``FIREBASE_CLIENT_EMAIL``
+      - ``JWT_SECRET``
+
+
+3. **Instalar las dependencias**
+```bash
+npm install 
+```
+5. **Iniciar la API**
+```bash
+npm start
+```
+## Contribuciones
+Si quieres contribuir en el desarrollo, por favor envia un **Pull Request**. Recuerda antes asegurarte que funcione correctamente en local, para intentar entre todos, tener un repositorio limpio y funcional.
+
+## Contacto
+
+**Jorge Eduardo Muñoz Quintero**\
+*Desarrollador principal*\
+jemunozqui@cesde.net | xeduarkk@gmail.com
+
+**Asistify**\
+*Equipo del proyecto*\
+proyectosDanny75@gmail.com
