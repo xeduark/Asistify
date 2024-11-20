@@ -36,31 +36,34 @@
     margin-top: 60px;
     margin-left: 20px;
     margin-right: 20px;
-    border: 2px black solid;
+   /* border: 2px black solid;*/
     
 
 }
 .contenedor1{
     width: 30%;
     height: 500px;
-    border: 2px black solid;
+    /*border: 2px black solid;*/
     display: block;
 }
 .contenedor2{
     width: 70%;
     height: 500px;
-    border: 2px black solid;  
+   /* border: 2px black solid;  */
     text-align: center;
     align-content: center;
+    padding-right: 100px;
     
     
 }
 .irLogin{
+    display: flex;
     margin-top:  20px;
     margin-left: 30px;
     width: 10%;
     height: 100px;
-    border: 2px black solid;
+    /*border: 2px black solid ;*/
+   
     align-content: center;
     text-align: center;
 }
@@ -68,18 +71,52 @@
     width: 80px;
     height: 80px;
 }
+
+
+.irLogin button {
+  display: flex;             /* Usamos flexbox para alinear el contenido */
+  flex-direction: column;    /* Coloca los elementos en una columna */   
+  align-items: center;       /* Centra verticalmente el contenido dentro del botón */
+  justify-content: center;   /* Centra el contenido horizontalmente */
+  padding: 10px 20px;        /* Ajusta el padding alrededor del contenido */
+  font-size: 16px;           /* Ajusta el tamaño del texto */
+  border: none;              /* Elimina el borde del botón */
+  background-color: transparent; /* Color de fondo (ajusta según tus necesidades) */
+  border-radius: 10px;
+  color: white;              /* Color del texto */
+  cursor: pointer;          /* Muestra el cursor como puntero */
+  transition: background-color 0.3s; /* Agrega una transición suave al color de fondo */
+}
+
+.irLogin button:hover {
+  background-color: #5C5696; /* Cambia el color de fondo cuando el mouse pasa por encima */
+}
+
+
+.iriLogin button img {
+  margin-right: 8px;         /* Espacio entre la imagen y el texto */
+  width: 20px;               /* Ajusta el tamaño de la imagen (ajusta según tus necesidades) */
+  height: 20px;              /* Ajusta el tamaño de la imagen */
+}
+
 .logoEmpresa{
     margin-top:  20px;
     margin-left: 150px;
+
+    display: flex;          /* Usamos flexbox */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;    /* Centra verticalmente */
+    
     width: 60%;
     height: 60%;
-    border: 2px black solid;
-    align-content: center;
-    text-align: center;
+    /*border: 2px black solid;*/
+    
+
+   
 }
 .logoEmpresa img{
-    width: 60%;
-    height: 60%;
+    width: 150%;
+    height: 150%;
 }
 .contenedor2 h1{
     
@@ -98,7 +135,7 @@
     height: 50%;
   
     border: 2px black solid; 
-    background-color: var(--azul-claro);
+    background-color: var(--purpura-claro-5);
     border-radius: 20px;
 }
 .input{
@@ -107,6 +144,7 @@
     height: 40px;
     outline: none;
     font-size: 25px;
+    border-radius: 10px;
 }
  
 .botones{
@@ -190,4 +228,6 @@
     margin-left: auto;
     color: var(--purpura-claro-5);
   }
+  
+
   
