@@ -15,7 +15,7 @@ const EditarAsistencia = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  // Toast
+  // revision 
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
