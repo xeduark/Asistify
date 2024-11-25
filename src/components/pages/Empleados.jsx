@@ -8,12 +8,12 @@ import { Table, Pagination, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import style from "./empleados.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 const Empleados = () => {
   const [searchValue, setSearchValue] = useState("");
   const [empleados, setEmpleados] = useState([]);
-  const [filteredEmpleados, setFilteredEmpleados] = useState([]); // Para filtrados
+  const [filteredEmpleados, setFilteredEmpleados] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -215,7 +215,7 @@ const Empleados = () => {
           <CiSearch className={style.iconS} />
         </span>
       </form>
-      {/*****************Tabla de Servidores **********************/}
+      {/*****************Tabla de Empleados **********************/}
       <div className={style.containerTable}>
         <Table className={`${style.table} ${style.customTable}`}>
           <thead>
@@ -238,7 +238,6 @@ const Empleados = () => {
           <tbody>
             {currentEmpleados.map((empleado, index) => (
               <tr key={empleado.id}>
-                {" "}
                 {/* Usar empleado.id como key */}
                 <td>
                   <input
@@ -282,10 +281,13 @@ const Empleados = () => {
                   <Form.Select
                     value={rowsPerPage}
                     onChange={(e) => setRowsPerPage(Number(e.target.value))}
-                    className={style.selectLine}
                   >
-                    <option value={5}>5</option>
-                    <option value={10}>10</option>
+                    <option value={5} className={style.selectLine}>
+                      5
+                    </option>
+                    <option value={10} className={style.selectLine}>
+                      10
+                    </option>
                   </Form.Select>
                 </div>
               </td>
@@ -296,7 +298,7 @@ const Empleados = () => {
                   <span>{`${indexOfFirstEmpleado + 1}-${Math.min(
                     indexOfLastEmpleado,
                     filteredEmpleados.length
-                  )} of ${filteredEmpleados.length}`}</span>
+                  )} de ${filteredEmpleados.length}`}</span>
                 </div>
               </td>
               <td colSpan="3">

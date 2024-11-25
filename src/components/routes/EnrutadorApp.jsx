@@ -9,6 +9,8 @@ import RegistroAsistencia from "../pages/RegistroAsistencia";
 import Empleados from "../pages/Empleados";
 import CrearEmpleado from "../forms/CrearEmpleado";
 import EditarEmpleado from "../forms/EditarEmpleado";
+import CrearAsistencia from "../forms/CrearAsistencia";
+import EditarAsistencia from "../forms/EditarAsistencia";
 import Dashboard from "../pages/Dashboard";
 
 
@@ -52,6 +54,14 @@ export let EnrutadorApp = [
             {
                 path: 'gestion-asistencias',
                 element: <GestionAsistencias />
+            },
+            {
+                path: 'crear-asistencia',
+                element: <CrearAsistencia />
+            },
+            {
+                path: '/asistencias/:id/editar',
+                element: <EditarAsistencia/>
             },
             {
                 path: 'perfil',

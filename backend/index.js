@@ -8,6 +8,7 @@ const app = express();
 const  authRoutes = require('./routes/auth'); 
 const usuarioRoutes = require('./routes/usuarios');
 const empleados = require('./routes/empleados');
+const asistencias = require('./routes/asistencias');
 
 
 // Middlewares
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/usuario', usuarioRoutes);
 app.use('/api/empleados', empleados);
+app.use('/api/asistencias', asistencias);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
